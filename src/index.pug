@@ -1,0 +1,83 @@
+#app
+  .container
+    .ticket
+      label
+        input#open(type="checkbox", v-model="open")
+        .cover
+          .bgcolor
+            i#down.fa.fa-chevron-down
+          img(:src="imgurl") 
+      .info
+        .event
+          .tital {{eventtital}}
+          .subtital {{subtital}}
+          .content
+            i.fa.fa-user
+            .ans ID: {{person}}
+          .content
+            i.fa.fa-calendar-alt
+            .ans {{date}}
+          .content
+            i.fa.fa-clock
+            .ans {{time_start + time_to + time_end}}
+          .content
+            i.fa.fa-ticket-alt
+            .ans {{day+type}}
+          .content
+            i.fa.fa-dollar-sign
+            .ans &yen; {{day==5? 11000:day*dayprice}}
+          .content
+            i.fa.fa-map-marker-alt
+            .ans {{site}}
+          .content
+            i.fa.fa-map
+            a.ans(v-bind:href="mapurl") {{adress}}
+
+        .status 
+          .st_hover
+          p status
+    .out_tital {{eventtital}}
+
+  .editor
+    .userinput
+      lable Picture URL :
+      input.longer(type="url", v-model="imgurl")
+    .userinput
+      lable Event Tital :
+      input(type="text" ,v-model="eventtital" )
+    .userinput
+      lable Subtital :
+      input(type="text" ,v-model="subtital" )
+    .userinput
+      lable Person ID :
+      input(type="text" ,v-model="person" )
+    .userinput
+      lable Event Date :
+      input(type="date" ,v-model="date" )
+    .userinput
+      lable Start Time :
+      input(type="time" ,v-model="time_start" )
+    .userinput
+      lable Endding Time :
+      input(type="time" ,v-model="time_end" )
+    .userinput
+      lable Ticket Type :
+      input(type="number", max= 5, min="1", v-model="day")
+      lable Day Ticket
+    .userinput
+      lable Location :
+      input.longer(type="text", v-model="site")
+    .userinput
+      lable Adress :
+      input.longer(type="text", v-model="adress")
+    .userinput
+      lable Map URL :
+      input.longer(type="url", v-model="mapurl")
+    .userinput#status
+      lable Status Color :
+      .status_con
+        input#st_color(type="color", v-model="color_st")
+        button#stbtn(v-on:click='statuscolor()') submit
+    .userinput
+      lable Status :
+      input#statusch(type="checkbox", v-model="status")  

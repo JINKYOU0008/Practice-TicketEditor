@@ -1,0 +1,185 @@
+@mixin borderview
+  border: 0.5px solid #4677b3
+$color_blueG: #30527c
+$color_bgcWhite: #eee
+$color_wordC: #222
+  
+*
+  // border: 0.5px solid blue
+  position: relative
+  box-sizing: border-box
+  font-family: 'Quicksand', sans-serif, 'Roboto', sans-serif, 'Noto Sans JP', sans-serif, 'Noto Sans TC', sans-serif
+html,body,#app
+  width: 100%
+  height: 100%
+  margin: 0
+  display: flex
+  justify-content: center
+  align-items: center
+  background-color: #333
+.container
+  display: flex
+  flex-direction: column
+.out_tital
+  margin: 0
+  font-size: 16px
+  font-weight: 400
+  padding: 10px 8px 
+  color: #bbb
+  transition-duration: 1s
+  border-bottom: 1px solid rgba($color_bgcWhite,0.2)
+  box-shadow: 0px 0px 40px -0.5px rgba(0,0,0,0.8)
+.ticket
+  width: 250px
+  box-shadow: 0px 0px 40px -0.5px rgba(0,0,0,0.8)
+  border-radius: 4px
+  overflow: hidden
+  
+  .info
+    height: 0px
+    transition-duration: 1.5s
+  .cover
+    width: 100%
+    height: 140px
+    overflow: hidden
+    display: flex
+    justify-content: center
+    z-index: 5
+    box-shadow: 0px 0px 40px 5px rgba(0,0,0,0.3)
+    #down
+      width: 100%
+      font-size: 20px
+      color: transparent
+      position: absolute
+      text-align: center
+      bottom: 5px
+      transition-duration: 0.5s
+    .bgcolor
+      position: absolute
+      width: 100%
+      height: 100%
+      background-color: transparent
+      z-index: 10
+      transition-duration: 0.5s
+      &:hover
+        cursor: pointer
+        background-color: rgba($color_bgcWhite,0.2)
+        #down
+          color: #aaa
+    img
+      width: 100%
+  .event
+    padding: 24px
+    background-color: $color_bgcWhite
+    // +borderview
+    .tital
+      margin: 0
+      padding: 0
+      margin-bottom: 5px
+
+      font-size: 24px
+      font-weight: 800
+      letter-spacing: 1px
+    .subtital
+      margin: 0
+      padding: 0
+      margin-bottom: 26px
+
+      font-size: 18px
+      font-weight: 800
+      letter-spacing: 1px
+    .content
+      margin: 0
+      padding: 0
+      margin-bottom: 18px
+
+      font-size: 13px
+      font-weight: 600
+      color: $color_wordC
+    .ans
+      display: inline-block
+    i
+      width: 24px
+      text-align: center
+      margin-right: 10px
+      color: #aaa
+    a
+      color: lighten($color_wordC,30)
+      font-weight: 400
+  .status
+    width: 100%
+    height: 54px
+    display: flex
+    margin: 0
+    background-color: $color_blueG
+    .st_hover
+      position: absolute
+      width: 100%
+      height: 100%
+      background-color: transparent
+      z-index: 10
+      &:hover
+        cursor: pointer
+        background-color: rgba(#222,0.2)
+    p
+      width: 100%
+      font-size: 16px
+      font-weight: 600
+      text-align: center
+      letter-spacing: 1.5px
+      color: #ccc
+      
+      
+  .status.dark
+  .status.light
+    
+.editor
+  // border: 2px solid darken($color_blueG,10)
+  width: 360px
+  margin-left: 80px
+  padding: 0px 25px
+  padding-top: 15px
+  display: flex
+  flex-direction: column
+  justify-content: center
+  background-color: rgba(#777,0.3)
+  .userinput
+    margin-bottom: 22px
+    lable
+      width: 95px
+      display: inline-block
+      color: #eee
+      font-size: 14px
+      // letter-spacing: 1px
+      margin-right: 18px
+    input
+      display: inline-block
+  .longer
+    width: 60%
+  #status
+    display: flex
+    align-items: center
+  .status_con
+    display: flex
+    align-items: center
+    left: 8px
+  #st_color
+    width: 30px
+    height: 30px
+    border: none
+    background: initial
+  #stbtn
+    left: 18px
+    padding: 4px 12px
+    background-color: transparent
+    color: #eee
+    font-size: 12px
+    border: 1px solid #666
+    &:hover
+      cursor: pointer
+      background-color: #666
+  #status_ch
+    top: 4px
+    
+#open
+  display: none
