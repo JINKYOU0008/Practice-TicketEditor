@@ -1,5 +1,8 @@
 @mixin borderview
-  border: 0.5px solid #4677b3
+  border: 0.5px solid rgba(#4677b3,0.7)
+@mixin size($w,$h:$w)
+  width: $w
+  height: $h
 $color_blueG: #30527c
 $color_bgcWhite: #eee
 $color_wordC: #222
@@ -13,38 +16,97 @@ html,body,#app
   width: 100%
   height: 100%
   margin: 0
+  background-color: #333
+#app
   display: flex
   justify-content: center
-  align-items: center
-  background-color: #333
-.container
+  padding-top: 120px
+.banner
+  //+borderview
+  width: 20%
+  min-width: 240px
+  height: 100%
+  .controlpanel
+    //+borderview
+    .mod_con
+      //+borderview
+      margin-bottom: 20px
+  .addticket
+    +size(45px)
+    border-radius: 12px 12px 12px 4px
+    background-color: rgba(#4677b3,0.7)
+    box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.3)
+    &:hover
+      cursor: pointer
+      background-color: rgba(#274B77,1)
+  #delMode_input
+    display: none
+  .mod_con
+    //+borderview
+    display: flex
+    align-items: center
+    &:hover
+      p
+        color: rgba(#ccc,1)
+    .Mod_p
+      //+borderview
+      margin: 0
+      display: inline-block
+      padding: 0px 10px
+      font-size: 16px
+      font-weight: 400
+      color: rgba(#bbb,0)
+      letter-spacing: 1px
+      transition-duration: 0.5s
+      &.p_show
+        color: rgba(#bbb,0.7)
+    
+  .delticket
+    +size(45px)
+    display: inline-block
+    border-radius: 4px 12px 12px 12px
+    background-color: rgba(#4677b3,0.7)
+    box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.3)
+    &:hover
+      cursor: pointer
+      background-color: rgba(#234773,1)
+    &.delMode_on
+      background-color: rgba(#234773,0)
+      border: 2px solid rgba(#234773,1)
+  #plus,#trashcan
+    top: 50%
+    left: 50% 
+    transform: translate(-50%,-50%)
+    color: rgba($color_bgcWhite,0.9)
+    font-size: 25px
+  #trashcan
+    font-size: 22px
+.ticketNeditor
   display: flex
   flex-direction: column
-.out_tital
-  margin: 0
-  font-size: 16px
-  font-weight: 400
-  padding: 10px 8px 
-  color: #bbb
-  transition-duration: 1s
-  border-bottom: 1px solid rgba($color_bgcWhite,0.2)
-  box-shadow: 0px 0px 40px -0.5px rgba(0,0,0,0.8)
+  align-items: center
+.ticketNoutT
+  z-index: 2
+.container
+  display: flex
+  flex-direction: row
+  margin-bottom: 70px
 .ticket
   width: 250px
   box-shadow: 0px 0px 40px -0.5px rgba(0,0,0,0.8)
   border-radius: 4px
   overflow: hidden
-  
-  .info
-    height: 0px
-    transition-duration: 1.5s
+  background-color: tansparent
+  #open
+    display: none
   .cover
     width: 100%
     height: 140px
     overflow: hidden
     display: flex
     justify-content: center
-    z-index: 5
+    background-color: #484848
+    z-index: 8
     box-shadow: 0px 0px 40px 5px rgba(0,0,0,0.3)
     #down
       width: 100%
@@ -54,6 +116,8 @@ html,body,#app
       text-align: center
       bottom: 5px
       transition-duration: 0.5s
+      &.close_down
+        display: none
     .bgcolor
       position: absolute
       width: 100%
@@ -68,15 +132,21 @@ html,body,#app
           color: #aaa
     img
       width: 100%
+  .info
+    height: 0
+    background-color: tansparent
+    transition-duration: 1.5s
+    &.open_info
+      height: 420px
   .event
+    height: 100%
     padding: 24px
     background-color: $color_bgcWhite
-    // +borderview
+    border-radius: 0px 0px 10px 10px
     .tital
       margin: 0
       padding: 0
       margin-bottom: 5px
-
       font-size: 24px
       font-weight: 800
       letter-spacing: 1px
@@ -84,7 +154,6 @@ html,body,#app
       margin: 0
       padding: 0
       margin-bottom: 26px
-
       font-size: 18px
       font-weight: 800
       letter-spacing: 1px
@@ -92,7 +161,6 @@ html,body,#app
       margin: 0
       padding: 0
       margin-bottom: 18px
-
       font-size: 13px
       font-weight: 600
       color: $color_wordC
@@ -108,78 +176,168 @@ html,body,#app
       font-weight: 400
   .status
     width: 100%
-    height: 54px
-    display: flex
+    height: 52px
+    position: absolute
+    bottom: 0
     margin: 0
     background-color: $color_blueG
+    &:hover
+      .st_hover
+        background-color: rgba(#333,0.2)
+        cursor: pointer
     .st_hover
       position: absolute
       width: 100%
       height: 100%
-      background-color: transparent
-      z-index: 10
-      &:hover
-        cursor: pointer
-        background-color: rgba(#222,0.2)
+      background-color: rgba(#333,0)
+      transition-duration: 0.3s
+      &.ticketused
+        cursor: default
+        background-color: rgba(#111,0.3)
     p
       width: 100%
-      font-size: 16px
+      font-size: 15px
       font-weight: 600
+      position: absolute
+      //top: 50%
+      //transform: translateY(-50%)
       text-align: center
       letter-spacing: 1.5px
-      color: #ccc
+      color: #ddd
+.out_tital
+  margin: 0
+  padding: 10px 8px
+  font-size: 16px
+  font-weight: 400
+  color: #bbb
+  transition-duration: 1s
+  border-bottom: 2px solid rgba($color_bgcWhite,0.2)
+  &.close_outT
+    color: transparent
+    border: none
+
+.setting
+  +size(100%)
+  margin: 0
+  position: absolute
+  .seticon
+    // +borderview
+    +size(40px)
+    transition-duration: 0.8s
+    transition-delay: 0.8s
+    left: 108%
+    background-color: rgba(#4677b3,0.7)
+    border-radius: 50%
+    box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.3)
+    &.open_ed
+      left: 0%
+      transition-delay: 0s
+    &.hide_set
+      transition-delay: 0s
+      left: 0%
+    &:hover
+      cursor: pointer
+    #cog
+      color: rgba($color_bgcWhite,0.9)
+      font-size: 20px
+      left: 50%
+      top: 50%
+      transform: translate(-50%,-50%)
+  .delMode
+    +size(50px,45px)
+    z-index: 0
+    background-color: rgba(#eee,0)
+    left: 3px
+    border-radius: 20px 0px 0px 20px
+    transition-duration: 0.5s
+    &.delMode_show
+      left: -32px
+      background-color: rgba(#eee,0.3)
+    &:hover
+      cursor: pointer
+      background-color: rgba(#eee,0.4)
+      left: -50px
+    #trash
+      color: rgba(#eee,0.8)
+      font-size: 18px
+      left: 10px
+      top: 50%
+      transform: translateY(-52%)
       
-      
-  .status.dark
-  .status.light
-    
 .editor
-  // border: 2px solid darken($color_blueG,10)
   width: 360px
-  margin-left: 80px
-  padding: 0px 25px
-  padding-top: 15px
-  display: flex
-  flex-direction: column
-  justify-content: center
+  height: 600px
+  overflow: hidden
+  transition-delay: 0.2s
+  transition-duration: 1s
+  margin-left: 60px
   background-color: rgba(#777,0.3)
-  .userinput
-    margin-bottom: 22px
-    lable
-      width: 95px
-      display: inline-block
-      color: #eee
-      font-size: 14px
-      // letter-spacing: 1px
-      margin-right: 18px
-    input
-      display: inline-block
+  &.close_ed
+    width: 0
+    margin-left: 0
+  &.close_ed_h
+    height: 0
+  .cover_ed
+    width: 100%
+    height: 100%
+    position: absolute
+    z-index: 5
+    background-color: #484848
+    &.open_cover
+      background-color: rgba(#484848,0)
+      z-index: 0
+      transition-delay: 1s
+  .closeEd
+    margin: 0
+    .icon_con
+      height: 40px
+      .closeicon
+        width: 25px
+        height: 25px
+        position: absolute
+        right: 0
+        margin: 10px
+        &:hover
+          cursor: pointer
+        &:before
+          content: ''
+          position: absolute
+          +size(15%,100%)
+          left: 50%
+          background-color: #aaa
+          border-radius: 5px
+          transform: translateX(-50%)
+          transform: rotate(-45deg)
+        &:after
+          content: ''
+          position: absolute
+          +size(15%,100%)
+          left: 50%
+          background-color: #aaa
+          border-radius: 5px
+          transform: translateX(-50%)
+          transform: rotate(45deg)
+        &.show_icon_ed
+  .items
+    display: flex
+    flex-direction: column
+    justify-content: center
+    padding: 10px
+    padding-top: 0px
+    .userinput
+      margin: 8px 8px 8px 15px
+      transition-delay: 2s
+      lable
+        width: 95px
+        display: inline-block
+        color: #eee
+        font-size: 14px
+        margin-right: 18px
+      input
+        display: inline-block
   .longer
     width: 60%
-  #status
-    display: flex
-    align-items: center
   .status_con
     display: flex
     align-items: center
     left: 8px
-  #st_color
-    width: 30px
-    height: 30px
-    border: none
-    background: initial
-  #stbtn
-    left: 18px
-    padding: 4px 12px
-    background-color: transparent
-    color: #eee
-    font-size: 12px
-    border: 1px solid #666
-    &:hover
-      cursor: pointer
-      background-color: #666
-  #status_ch
-    top: 4px
-    
-#open
-  display: none

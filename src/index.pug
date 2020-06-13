@@ -1,83 +1,69 @@
 #app
-  .container
-    .ticket
+  .banner
+    .controlpanel
+      .mod_con
+        .addticket(@click="addticket",v-model="delMode")
+          i.fa.fa-plus#plus
+        p.Mod_p Add Ticket
       label
-        input#open(type="checkbox", v-model="open")
-        .cover
-          .bgcolor
-            i#down.fa.fa-chevron-down
-          img(:src="imgurl") 
-      .info
-        .event
-          .tital {{eventtital}}
-          .subtital {{subtital}}
-          .content
-            i.fa.fa-user
-            .ans ID: {{person}}
-          .content
-            i.fa.fa-calendar-alt
-            .ans {{date}}
-          .content
-            i.fa.fa-clock
-            .ans {{time_start + time_to + time_end}}
-          .content
-            i.fa.fa-ticket-alt
-            .ans {{day+type}}
-          .content
-            i.fa.fa-dollar-sign
-            .ans &yen; {{day==5? 11000:day*dayprice}}
-          .content
-            i.fa.fa-map-marker-alt
-            .ans {{site}}
-          .content
-            i.fa.fa-map
-            a.ans(v-bind:href="mapurl") {{adress}}
+        input#delMode_input(type="checkbox")
+        .mod_con
+          .delticket(@click="delMode=!delMode" , :class="{delMode_on: delMode}")
+            i.fa.fa-trash-alt#trashcan
+          p.Mod_p(:class="{p_show: delMode}") Delete Ticket
+  .ticketNeditor
+    .container(v-for="(ticket,Tid) in events")
+      .ticketNoutT
+        .ticket
+          label
+            input#open(type="checkbox", v-model="ticket.openT")
+            .cover
+              .bgcolor(@click="seting_close(Tid) , hideEd(Tid)")
+                i#down.fa.fa-chevron-down(:class="{close_down: ticket.openT}")
+              img(:src="ticket.imgurl")
+          .info(:class="{open_info: ticket.openT}")
+            .event
+              .tital {{ticket.eventtital}}
+              .subtital {{ticket.subtital}}
+              .content
+                i.fa.fa-user
+                .ans ID: {{ticket.person}}
+              .content
+                i.fa.fa-calendar-alt
+                .ans {{ticket.date}}
+              .content
+                i.fa.fa-clock
+                .ans {{ticket.time_start + ticket.time_to + ticket.time_end}}
+              .content
+                i.fa.fa-ticket-alt
+                .ans {{ticket.type}}
+              .content
+                i.fa.fa-dollar-sign
+                .ans &yen; {{ticket.price}}
+              .content
+                i.fa.fa-map-marker-alt
+                .ans {{ticket.site}}
+              .content
+                i.fa.fa-map
+                a.ans(v-bind:href="ticket.mapurl") {{ticket.adress}}
+            .status(:style="{background: ticket.color_st}")
+              .st_hover(:class="{ticketused: ticket.status}")
+                p {{ticket.status?ticket.status_ued:ticket.status_un}}
+        .out_tital(:class="{close_outT: ticket.openT}") {{ticket.eventtital}}
 
-        .status 
-          .st_hover
-          p status
-    .out_tital {{eventtital}}
+      .setting
+        .seticon(:class="{open_ed: ticket.openE, hide_set: !ticket.openT}", v-model="ticket.openE" , @click="ticket.openE=!ticket.openE , showEd(Tid)")
+          i.fa.fa-sliders-h#cog
+        .delMode(:class="{delMode_show: delMode}" , @click="delticket(Tid)")
+          i.far.fa-trash-alt#trash
 
-  .editor
-    .userinput
-      lable Picture URL :
-      input.longer(type="url", v-model="imgurl")
-    .userinput
-      lable Event Tital :
-      input(type="text" ,v-model="eventtital" )
-    .userinput
-      lable Subtital :
-      input(type="text" ,v-model="subtital" )
-    .userinput
-      lable Person ID :
-      input(type="text" ,v-model="person" )
-    .userinput
-      lable Event Date :
-      input(type="date" ,v-model="date" )
-    .userinput
-      lable Start Time :
-      input(type="time" ,v-model="time_start" )
-    .userinput
-      lable Endding Time :
-      input(type="time" ,v-model="time_end" )
-    .userinput
-      lable Ticket Type :
-      input(type="number", max= 5, min="1", v-model="day")
-      lable Day Ticket
-    .userinput
-      lable Location :
-      input.longer(type="text", v-model="site")
-    .userinput
-      lable Adress :
-      input.longer(type="text", v-model="adress")
-    .userinput
-      lable Map URL :
-      input.longer(type="url", v-model="mapurl")
-    .userinput#status
-      lable Status Color :
-      .status_con
-        input#st_color(type="color", v-model="color_st")
-        button#stbtn(v-on:click='statuscolor()') submit
-    .userinput
-      lable Status :
-      input#statusch(type="checkbox", v-model="status")  
+      .editor(:class="{close_ed: !ticket.openE, close_ed_h: !ticket.openT}")
+        .cover_ed(:class="{open_cover: ticket.show_ed}")
+        .closeEd
+          .icon_con
+            .closeicon(@click="ticket.openE=!ticket.openE , hideEd(Tid)")
+        .items
+          .userinput(v-for="editor in editors")
+            lable {{editor.name + " :"}}
+            input(:class="{longer: editor.longer}", v-bind:type="editor.type", v-bind:placeholder="editor.holder", v-model="ticket[editor.model]")
+      
