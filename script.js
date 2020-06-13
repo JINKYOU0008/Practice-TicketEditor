@@ -104,14 +104,14 @@ var vm = new Vue({
         name: "Location",
         longer: true,
         type: "text",
-        holder: "Name of the event place.",
+        holder: "Name of the event's place.",
         model: "site",
       },
       {
         name: "Adress",
         longer: true,
         type: "text",
-        holder: "Adress of the event place.",
+        holder: "Adress of the event's place.",
         model: "adress",
       },
       {
@@ -159,18 +159,18 @@ var vm = new Vue({
         //cover image
         imgurl: "",
         //person
-        person: "person id",
+        person: "Owner's ID",
         //time
         date: "",
         time_start: "00:00",
         time_to: " - ",
         time_end: "01:00",
         //ticket type & price
-        type: "ticket type",
+        type: "Type of the ticket",
         price: "0",
         //location
-        site: "event location",
-        adress: "ticket adress",
+        site: "Name of the event's place",
+        adress: "Adress of the event's place",
         mapurl: "",
         //tatus
         status_un: "UNUSED",
