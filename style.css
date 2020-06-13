@@ -18,8 +18,8 @@ html, body, #app {
 }
 
 .banner {
-  width: 20%;
-  min-width: 240px;
+  width: 15%;
+  min-width: 220px;
   height: 100%;
 }
 .banner .controlpanel .mod_con {
