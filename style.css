@@ -8,26 +8,98 @@ html, body, #app {
   width: 100%;
   height: 100%;
   margin: 0;
+  background-color: #333;
+}
+
+#app {
   display: flex;
   justify-content: center;
+  padding-top: 120px;
+}
+
+.banner {
+  width: 20%;
+  min-width: 240px;
+  height: 100%;
+}
+.banner .controlpanel .mod_con {
+  margin-bottom: 20px;
+}
+.banner .addticket {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px 12px 12px 4px;
+  background-color: rgba(70, 119, 179, 0.7);
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+}
+.banner .addticket:hover {
+  cursor: pointer;
+  background-color: #274b77;
+}
+.banner #delMode_input {
+  display: none;
+}
+.banner .mod_con {
+  display: flex;
   align-items: center;
-  background-color: #333;
+}
+.banner .mod_con:hover p {
+  color: #cccccc;
+}
+.banner .mod_con .Mod_p {
+  margin: 0;
+  display: inline-block;
+  padding: 0px 10px;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(187, 187, 187, 0);
+  letter-spacing: 1px;
+  transition-duration: 0.5s;
+}
+.banner .mod_con .Mod_p.p_show {
+  color: rgba(187, 187, 187, 0.7);
+}
+.banner .delticket {
+  width: 45px;
+  height: 45px;
+  display: inline-block;
+  border-radius: 4px 12px 12px 12px;
+  background-color: rgba(70, 119, 179, 0.7);
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+}
+.banner .delticket:hover {
+  cursor: pointer;
+  background-color: #234773;
+}
+.banner .delticket.delMode_on {
+  background-color: rgba(35, 71, 115, 0);
+  border: 2px solid #234773;
+}
+.banner #plus, .banner #trashcan {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(238, 238, 238, 0.9);
+  font-size: 25px;
+}
+.banner #trashcan {
+  font-size: 22px;
+}
+
+.ticketNeditor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ticketNoutT {
+  z-index: 2;
 }
 
 .container {
   display: flex;
-  flex-direction: column;
-}
-
-.out_tital {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 400;
-  padding: 10px 8px;
-  color: #bbb;
-  transition-duration: 1s;
-  border-bottom: 1px solid rgba(238, 238, 238, 0.2);
-  box-shadow: 0px 0px 40px -0.5px rgba(0, 0, 0, 0.8);
+  flex-direction: row;
+  margin-bottom: 70px;
 }
 
 .ticket {
@@ -35,10 +107,10 @@ html, body, #app {
   box-shadow: 0px 0px 40px -0.5px rgba(0, 0, 0, 0.8);
   border-radius: 4px;
   overflow: hidden;
+  background-color: tansparent;
 }
-.ticket .info {
-  height: 0px;
-  transition-duration: 1.5s;
+.ticket #open {
+  display: none;
 }
 .ticket .cover {
   width: 100%;
@@ -46,7 +118,8 @@ html, body, #app {
   overflow: hidden;
   display: flex;
   justify-content: center;
-  z-index: 5;
+  background-color: #484848;
+  z-index: 8;
   box-shadow: 0px 0px 40px 5px rgba(0, 0, 0, 0.3);
 }
 .ticket .cover #down {
@@ -57,6 +130,9 @@ html, body, #app {
   text-align: center;
   bottom: 5px;
   transition-duration: 0.5s;
+}
+.ticket .cover #down.close_down {
+  display: none;
 }
 .ticket .cover .bgcolor {
   position: absolute;
@@ -76,9 +152,19 @@ html, body, #app {
 .ticket .cover img {
   width: 100%;
 }
+.ticket .info {
+  height: 0;
+  background-color: tansparent;
+  transition-duration: 1.5s;
+}
+.ticket .info.open_info {
+  height: 420px;
+}
 .ticket .event {
+  height: 100%;
   padding: 24px;
   background-color: #eee;
+  border-radius: 0px 0px 10px 10px;
 }
 .ticket .event .tital {
   margin: 0;
@@ -119,88 +205,203 @@ html, body, #app {
 }
 .ticket .status {
   width: 100%;
-  height: 54px;
-  display: flex;
+  height: 52px;
+  position: absolute;
+  bottom: 0;
   margin: 0;
   background-color: #30527c;
+}
+.ticket .status:hover .st_hover {
+  background-color: rgba(51, 51, 51, 0.2);
+  cursor: pointer;
 }
 .ticket .status .st_hover {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: transparent;
-  z-index: 10;
+  background-color: rgba(51, 51, 51, 0);
+  transition-duration: 0.3s;
 }
-.ticket .status .st_hover:hover {
-  cursor: pointer;
-  background-color: rgba(34, 34, 34, 0.2);
+.ticket .status .st_hover.ticketused {
+  cursor: default;
+  background-color: rgba(17, 17, 17, 0.3);
 }
 .ticket .status p {
   width: 100%;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
+  position: absolute;
   text-align: center;
   letter-spacing: 1.5px;
-  color: #ccc;
+  color: #ddd;
+}
+
+.out_tital {
+  margin: 0;
+  padding: 10px 8px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #bbb;
+  transition-duration: 1s;
+  border-bottom: 2px solid rgba(238, 238, 238, 0.2);
+}
+.out_tital.close_outT {
+  color: transparent;
+  border: none;
+}
+
+.setting {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  position: absolute;
+}
+.setting .seticon {
+  width: 40px;
+  height: 40px;
+  transition-duration: 0.8s;
+  transition-delay: 0.8s;
+  left: 108%;
+  background-color: rgba(70, 119, 179, 0.7);
+  border-radius: 50%;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+}
+.setting .seticon.open_ed {
+  left: 0%;
+  transition-delay: 0s;
+}
+.setting .seticon.hide_set {
+  transition-delay: 0s;
+  left: 0%;
+}
+.setting .seticon:hover {
+  cursor: pointer;
+}
+.setting .seticon #cog {
+  color: rgba(238, 238, 238, 0.9);
+  font-size: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.setting .delMode {
+  width: 50px;
+  height: 45px;
+  z-index: 0;
+  background-color: rgba(238, 238, 238, 0);
+  left: 3px;
+  border-radius: 20px 0px 0px 20px;
+  transition-duration: 0.5s;
+}
+.setting .delMode.delMode_show {
+  left: -32px;
+  background-color: rgba(238, 238, 238, 0.3);
+}
+.setting .delMode:hover {
+  cursor: pointer;
+  background-color: rgba(238, 238, 238, 0.4);
+  left: -50px;
+}
+.setting .delMode #trash {
+  color: rgba(238, 238, 238, 0.8);
+  font-size: 18px;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-52%);
 }
 
 .editor {
   width: 360px;
-  margin-left: 80px;
-  padding: 0px 25px;
-  padding-top: 15px;
+  height: 600px;
+  overflow: hidden;
+  transition-delay: 0.2s;
+  transition-duration: 1s;
+  margin-left: 60px;
+  background-color: rgba(119, 119, 119, 0.3);
+}
+.editor.close_ed {
+  width: 0;
+  margin-left: 0;
+}
+.editor.close_ed_h {
+  height: 0;
+}
+.editor .cover_ed {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 5;
+  background-color: #484848;
+}
+.editor .cover_ed.open_cover {
+  background-color: rgba(72, 72, 72, 0);
+  z-index: 0;
+  transition-delay: 1s;
+}
+.editor .closeEd {
+  margin: 0;
+}
+.editor .closeEd .icon_con {
+  height: 40px;
+}
+.editor .closeEd .icon_con .closeicon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 0;
+  margin: 10px;
+}
+.editor .closeEd .icon_con .closeicon:hover {
+  cursor: pointer;
+}
+.editor .closeEd .icon_con .closeicon:before {
+  content: "";
+  position: absolute;
+  width: 15%;
+  height: 100%;
+  left: 50%;
+  background-color: #aaa;
+  border-radius: 5px;
+  transform: translateX(-50%);
+  transform: rotate(-45deg);
+}
+.editor .closeEd .icon_con .closeicon:after {
+  content: "";
+  position: absolute;
+  width: 15%;
+  height: 100%;
+  left: 50%;
+  background-color: #aaa;
+  border-radius: 5px;
+  transform: translateX(-50%);
+  transform: rotate(45deg);
+}
+.editor .items {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: rgba(119, 119, 119, 0.3);
+  padding: 10px;
+  padding-top: 0px;
 }
-.editor .userinput {
-  margin-bottom: 22px;
+.editor .items .userinput {
+  margin: 8px 8px 8px 15px;
+  transition-delay: 2s;
 }
-.editor .userinput lable {
+.editor .items .userinput lable {
   width: 95px;
   display: inline-block;
   color: #eee;
   font-size: 14px;
   margin-right: 18px;
 }
-.editor .userinput input {
+.editor .items .userinput input {
   display: inline-block;
 }
 .editor .longer {
   width: 60%;
 }
-.editor #status {
-  display: flex;
-  align-items: center;
-}
 .editor .status_con {
   display: flex;
   align-items: center;
   left: 8px;
-}
-.editor #st_color {
-  width: 30px;
-  height: 30px;
-  border: none;
-  background: initial;
-}
-.editor #stbtn {
-  left: 18px;
-  padding: 4px 12px;
-  background-color: transparent;
-  color: #eee;
-  font-size: 12px;
-  border: 1px solid #666;
-}
-.editor #stbtn:hover {
-  cursor: pointer;
-  background-color: #666;
-}
-.editor #status_ch {
-  top: 4px;
-}
-
-#open {
-  display: none;
 }
