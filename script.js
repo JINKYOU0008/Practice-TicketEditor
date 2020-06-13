@@ -34,37 +34,6 @@ var vm = new Vue({
         openT: false,
         show_ed: false,
       },
-      //new event
-      {
-        //tital
-        eventtital: "EVENT'S TITAL",
-        subtital: "SUBTITAL",
-        //cover image
-        imgurl: "",
-        //person
-        person: "person id",
-        //time
-        date: "",
-        time_start: "00:00",
-        time_to: " - ",
-        time_end: "01:00",
-        //ticket type & price
-        type: "ticket type",
-        price: "0",
-        //location
-        site: "event location",
-        adress: "ticket adress",
-        mapurl: "",
-        //tatus
-        status_un: "UNUSED",
-        status_ued: "USED",
-        color_st: "#30527c",
-        status: false,
-        //check
-        openE: false,
-        openT: false,
-        show_ed: false,
-      },
       
     ],
     editors: [
