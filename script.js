@@ -93,8 +93,7 @@ var vm = new Vue({
         openE: false,
         openT: false,
         show_ed: false,
-      }
-      
+      },
     ],
     editors: [
       {
