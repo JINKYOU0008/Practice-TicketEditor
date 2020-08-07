@@ -571,7 +571,7 @@ html, body {
     padding: 20px;
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 800px) {
   .header {
     z-index: 1;
     width: 100%;
