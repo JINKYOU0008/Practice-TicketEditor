@@ -2,91 +2,123 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - [work] Vue-Ticket Editor-IIII</title>
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Noto+Sans+JP&amp;family=Noto+Sans+TC&amp;family=Quicksand&amp;family=Roboto&amp;display=swap'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'><link rel="stylesheet" href="./style.css">
+  <title>CodePen - [work] RWD-Ticket Editor-X</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Noto+Sans+JP&amp;family=Noto+Sans+TC&amp;family=Quicksand&amp;family=Roboto&amp;display=swap'><link rel="stylesheet" href="./style.css">
 
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <div id="app">
-  <div class="banner">
-    <div class="controlpanel">
-      <div class="mod_con">
-        <div class="addticket" @click="addticket" v-model="delMode"><i class="fa fa-plus" id="plus"></i></div>
-        <p class="Mod_p">Add Ticket</p>
+  <div class="header">
+    <div class="space_h_left"></div>
+    <div class="Add_header">
+      <div class="header_item"><i class="fa fa-plus" id="plus"></i>
+        <div class="btn_h" @click="AddTK">新增 New</div>
       </div>
-      <label>
-        <input id="delMode_input" type="checkbox"/>
-        <div class="mod_con">
-          <div class="delticket" @click="delMode=!delMode" :class="{delMode_on: delMode}"><i class="fa fa-trash-alt" id="trashcan"></i></div>
-          <p class="Mod_p" :class="{p_show: delMode}">Delete Ticket</p>
-        </div>
-      </label>
     </div>
+    <div class="Delete_header">
+      <div class="header_item"><i class="fa fa-trash-alt" id="trashcan"></i>
+        <div class="btn_h" @click="deleteModeOnOff=!deleteModeOnOff" :class="{screenS_deleteModeOn_target: deleteModeOnOff}">刪除 Delete</div>
+        <!--screenS_deleteModeOn_target-->
+      </div>
+    </div>
+    <div class="space_h_right"></div>
   </div>
-  <div class="ticketNeditor">
-    <div class="container" v-for="(ticket,Tid) in events">
-      <div class="ticketNoutT">
+  <div class="section_main">
+    <div class="space_left"></div>
+    <div class="Mode">
+      <div class="mode" id="New">
+        <div class="btn_mode add_mode" @click="AddTK"><i class="fa fa-plus" id="plus"></i></div>
+        <div class="name_mode">
+          <div class="name">
+            <p class="p_zh">新增</p>
+            <p class="p_en">New One</p>
+          </div>
+        </div>
+      </div>
+      <div class="mode" id="Del">
+        <div class="btn_mode delete_mode" @click="deleteModeOnOff=!deleteModeOnOff" :class="{deleteModeOn_target: deleteModeOnOff}"><i class="fa fa-trash-alt" id="trashcan"></i></div>
+        <div class="name_mode">
+          <div class="name" :class="{deleteModeOn_target: deleteModeOnOff}">
+            <p class="p_zh">移除 </p>
+            <p class="p_en">Delete</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="Tickets">
+      <div class="Ticket" v-for="(TK,TKid) in events">
+        <div class="editbtn" :class="{infoOpen_editbtnShow: TK.cover_infoOpenClose , editorOpen_editbtnHide: TK.editorOpenClose}">
+          <label>
+            <input id="input_editbtn_editorOpenClose" type="checkbox" v-model="TK.editorOpenClose"/><i class="fa fa-sliders-h" id="cog"></i>
+          </label>
+        </div>
+        <!--Each one's delete btn-->
+        <div class="delbtn" :class="{del_mode: deleteModeOnOff}" @click="DeleteTK(TKid)"><i class="fa fa-trash-alt"></i></div>
         <div class="ticket">
           <label>
-            <input id="open" type="checkbox" v-model="ticket.openT"/>
-            <div class="cover">
-              <div class="bgcolor" @click="seting_close(Tid) , hideEd(Tid)"><i class="fa fa-chevron-down" id="down" :class="{close_down: ticket.openT}"></i></div><img :src="ticket.imgurl"/>
+            <input id="input_cover_infoOpenClose" type="checkbox" v-model="TK.cover_infoOpenClose"/>
+            <div class="Cover">
+              <div class="cover" @click="cover_click_OpenClose(TKid)"><i class="fa fa-chevron-down" id="down" :class="{infoOpen_displayNone: TK.cover_infoOpenClose}"></i></div>
+              <div class="image" :style="{backgroundImage: 'url('+ TK.image_url +')'}"></div>
             </div>
           </label>
-          <div class="info" :class="{open_info: ticket.openT}">
-            <div class="event">
-              <div class="tital">{{ticket.eventtital}}</div>
-              <div class="subtital">{{ticket.subtital}}</div>
-              <div class="content"><i class="fa fa-user"></i>
-                <div class="ans">ID: {{ticket.person}}</div>
-              </div>
-              <div class="content"><i class="fa fa-calendar-alt"></i>
-                <div class="ans">{{ticket.date}}</div>
-              </div>
-              <div class="content"><i class="fa fa-clock"></i>
-                <div class="ans">{{ticket.time_start + ticket.time_to + ticket.time_end}}</div>
-              </div>
-              <div class="content"><i class="fa fa-ticket-alt"></i>
-                <div class="ans">{{ticket.type}}</div>
-              </div>
-              <div class="content"><i class="fa fa-dollar-sign"></i>
-                <div class="ans">NT$ {{ticket.price}}</div>
-              </div>
-              <div class="content"><i class="fa fa-map-marker-alt"></i>
-                <div class="ans">{{ticket.site}}</div>
-              </div>
-              <div class="content"><i class="fa fa-map"></i><a class="ans" v-bind:href="ticket.mapurl">{{ticket.adress}}</a></div>
+          <div class="info" :class="{info_close: !TK.cover_infoOpenClose}">
+            <div class="name">
+              <div class="title">{{TK.name_title}}</div>
+              <div class="subtitle">{{TK.name_subtitle}}</div>
             </div>
-            <div class="status" :style="{background: ticket.color_st}">
-              <div class="st_hover" :class="{ticketused: ticket.status}">
-                <p>{{ticket.status?ticket.status_ued:ticket.status_un}}</p>
-              </div>
+            <div class="content"><i class="fa fa-user"></i>
+              <div class="ans">{{TK.content_ans_id}}</div>
+            </div>
+            <div class="content"><i class="fa fa-calendar-alt"></i>
+              <div class="ans">{{TK.content_ans_date_start + TK.content_ans_date_to + TK.content_ans_date_end}}</div>
+            </div>
+            <div class="content"><i class="fa fa-clock"></i>
+              <div class="ans">{{TK.content_ans_time_start + TK.content_ans_time_to + TK.content_ans_time_end}}</div>
+            </div>
+            <div class="content"><i class="fa fa-ticket-alt"></i>
+              <div class="ans">{{TK.content_ans_type}}</div>
+            </div>
+            <div class="content"><i class="fa fa-dollar-sign"></i>
+              <div class="ans">{{TK.content_ans_price}}</div>
+            </div>
+            <div class="content"><i class="fa fa-map-marker-alt"></i>
+              <div class="ans">{{TK.content_ans_site}}</div>
+            </div>
+            <div class="content"><i class="fa fa-map"></i><a class="ans" v-bind:href="TK.content_ans_map_url">{{TK.content_ans_adress}}</a></div>
+          </div>
+          <div class="usingstate">
+            <div class="stateNoutname" :class="{close_ticket: !TK.cover_infoOpenClose , usingstate_expired: !TK.state}">
+              <h3 class="state">{{TK.state?TK.state_on:TK.state_off}}</h3>
+              <h3 class="outName">{{TK.name_title}}</h3>
             </div>
           </div>
         </div>
-        <div class="out_tital" :class="{close_outT: ticket.openT}">{{ticket.eventtital}}</div>
-      </div>
-      <div class="setting">
-        <div class="seticon" :class="{open_ed: ticket.openE, hide_set: !ticket.openT}" v-model="ticket.openE" @click="ticket.openE=!ticket.openE , showEd(Tid)"><i class="fa fa-sliders-h" id="cog"></i></div>
-        <div class="delMode" :class="{delMode_show: delMode}" @click="delticket(Tid)"><i class="far fa-trash-alt" id="trash"></i></div>
-      </div>
-      <div class="editor" :class="{close_ed: !ticket.openE, close_ed_h: !ticket.openT}">
-        <div class="cover_ed" :class="{open_cover: ticket.show_ed}"></div>
-        <div class="closeEd">
-          <div class="icon_con">
-            <div class="closeicon" @click="ticket.openE=!ticket.openE , hideEd(Tid)"></div>
-          </div>
-        </div>
-        <div class="items">
-          <div class="userinput" v-for="editor in editors">
-            <lable>{{editor.name + " :"}}</lable>
-            <input :class="{longer: editor.longer}" v-bind:type="editor.type" v-bind:placeholder="editor.holder" v-model="ticket[editor.model]"/>
+        <div class="Edit" :class="{screenMS_editor_close_bgcHide: !TK.editorOpenClose}">
+          <div class="editor" :class="{close_editor: !TK.editorOpenClose}">
+            <div class="editor_cover" :class="{editor_cover_hide: TK.editorOpenClose}"></div>
+            <div class="close_icon_editor"><i class="fa fa-times" id="close" :class="{closeicon_hide: !TK.editorOpenClose}" @click="TK.editorOpenClose=!TK.editorOpenClose"></i></div>
+            <div class="editor_Content">
+              <div class="editor_content">
+                <div class="editor_content_item" v-for="ED in editors"> 
+                  <lable>{{ED.name + " :"}}</lable>
+                  <input v-bind:type="ED.type" v-bind:placeholder="ED.holder" :class="{longer: ED.longer}" v-model="TK[ED.model]"/>
+                </div>
+                <!--.editor_content_item
+                lable test
+                select(v-model="TK.state")
+                  option(value="已使用 Checked") 已使用 Checked
+                  option(value="已失效 Expired") 已失效 Expired
+                -->
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="space_right"></div>
   </div>
 </div>
 <!-- partial -->

@@ -1,69 +1,92 @@
 #app
-  .banner
-    .controlpanel
-      .mod_con
-        .addticket(@click="addticket",v-model="delMode")
+  .header
+    .space_h_left
+    .Add_header
+      .header_item
+        i.fa.fa-plus#plus
+        .btn_h(@click="AddTK") 新增 New
+    .Delete_header
+      .header_item
+        i.fa.fa-trash-alt#trashcan
+        .btn_h(@click="deleteModeOnOff=!deleteModeOnOff" , :class="{screenS_deleteModeOn_target: deleteModeOnOff}") 刪除 Delete
+        //screenS_deleteModeOn_target
+    .space_h_right
+  .section_main
+    .space_left
+    .Mode
+      .mode#New
+        .btn_mode.add_mode(@click="AddTK")
           i.fa.fa-plus#plus
-        p.Mod_p Add Ticket
-      label
-        input#delMode_input(type="checkbox")
-        .mod_con
-          .delticket(@click="delMode=!delMode" , :class="{delMode_on: delMode}")
-            i.fa.fa-trash-alt#trashcan
-          p.Mod_p(:class="{p_show: delMode}") Delete Ticket
-  .ticketNeditor
-    .container(v-for="(ticket,Tid) in events")
-      .ticketNoutT
+        .name_mode
+          .name
+            p.p_zh 新增
+            p.p_en New One
+      .mode#Del
+        .btn_mode.delete_mode(@click="deleteModeOnOff=!deleteModeOnOff" , :class="{deleteModeOn_target: deleteModeOnOff}")
+          i.fa.fa-trash-alt#trashcan
+        .name_mode
+          .name(:class="{deleteModeOn_target: deleteModeOnOff}")
+            p.p_zh 移除 
+            p.p_en Delete
+    .Tickets
+      .Ticket(v-for="(TK,TKid) in events")
+        .editbtn(:class="{infoOpen_editbtnShow: TK.cover_infoOpenClose , editorOpen_editbtnHide: TK.editorOpenClose}")
+          label
+            input#input_editbtn_editorOpenClose(type="checkbox", v-model="TK.editorOpenClose")
+            i.fa.fa-sliders-h#cog
+        //Each one's delete btn
+        .delbtn(:class="{del_mode: deleteModeOnOff}" , @click="DeleteTK(TKid)")
+          i.fa.fa-trash-alt
         .ticket
           label
-            input#open(type="checkbox", v-model="ticket.openT")
-            .cover
-              .bgcolor(@click="seting_close(Tid) , hideEd(Tid)")
-                i#down.fa.fa-chevron-down(:class="{close_down: ticket.openT}")
-              img(:src="ticket.imgurl")
-          .info(:class="{open_info: ticket.openT}")
-            .event
-              .tital {{ticket.eventtital}}
-              .subtital {{ticket.subtital}}
-              .content
-                i.fa.fa-user
-                .ans ID: {{ticket.person}}
-              .content
+            input#input_cover_infoOpenClose(type="checkbox", v-model="TK.cover_infoOpenClose")
+            .Cover
+              .cover(@click="cover_click_OpenClose(TKid)")
+                i#down.fa.fa-chevron-down(:class="{infoOpen_displayNone: TK.cover_infoOpenClose}")
+              .image(:style="{backgroundImage: 'url('+ TK.image_url +')'}")
+          .info(:class="{info_close: !TK.cover_infoOpenClose}")
+            .name
+              .title {{TK.name_title}}
+              .subtitle {{TK.name_subtitle}}
+            .content
+              i.fa.fa-user
+              .ans {{TK.content_ans_id}}
+            .content
                 i.fa.fa-calendar-alt
-                .ans {{ticket.date}}
-              .content
-                i.fa.fa-clock
-                .ans {{ticket.time_start + ticket.time_to + ticket.time_end}}
-              .content
-                i.fa.fa-ticket-alt
-                .ans {{ticket.type}}
-              .content
-                i.fa.fa-dollar-sign
-                .ans NT$ {{ticket.price}}
-              .content
-                i.fa.fa-map-marker-alt
-                .ans {{ticket.site}}
-              .content
-                i.fa.fa-map
-                a.ans(v-bind:href="ticket.mapurl") {{ticket.adress}}
-            .status(:style="{background: ticket.color_st}")
-              .st_hover(:class="{ticketused: ticket.status}")
-                p {{ticket.status?ticket.status_ued:ticket.status_un}}
-        .out_tital(:class="{close_outT: ticket.openT}") {{ticket.eventtital}}
-
-      .setting
-        .seticon(:class="{open_ed: ticket.openE, hide_set: !ticket.openT}", v-model="ticket.openE" , @click="ticket.openE=!ticket.openE , showEd(Tid)")
-          i.fa.fa-sliders-h#cog
-        .delMode(:class="{delMode_show: delMode}" , @click="delticket(Tid)")
-          i.far.fa-trash-alt#trash
-
-      .editor(:class="{close_ed: !ticket.openE, close_ed_h: !ticket.openT}")
-        .cover_ed(:class="{open_cover: ticket.show_ed}")
-        .closeEd
-          .icon_con
-            .closeicon(@click="ticket.openE=!ticket.openE , hideEd(Tid)")
-        .items
-          .userinput(v-for="editor in editors")
-            lable {{editor.name + " :"}}
-            input(:class="{longer: editor.longer}", v-bind:type="editor.type", v-bind:placeholder="editor.holder", v-model="ticket[editor.model]")
-      
+                .ans {{TK.content_ans_date_start + TK.content_ans_date_to + TK.content_ans_date_end}}
+            .content
+              i.fa.fa-clock
+              .ans {{TK.content_ans_time_start + TK.content_ans_time_to + TK.content_ans_time_end}}
+            .content
+              i.fa.fa-ticket-alt
+              .ans {{TK.content_ans_type}}
+            .content
+              i.fa.fa-dollar-sign
+              .ans {{TK.content_ans_price}}
+            .content
+              i.fa.fa-map-marker-alt
+              .ans {{TK.content_ans_site}}
+            .content
+              i.fa.fa-map
+              a.ans(v-bind:href="TK.content_ans_map_url") {{TK.content_ans_adress}}
+          .usingstate
+            .stateNoutname(:class="{close_ticket: !TK.cover_infoOpenClose , usingstate_expired: !TK.state}")
+              h3.state {{TK.state?TK.state_on:TK.state_off}}
+              h3.outName {{TK.name_title}}
+        .Edit(:class="{screenMS_editor_close_bgcHide: !TK.editorOpenClose}")
+          .editor(:class="{close_editor: !TK.editorOpenClose}")
+            .editor_cover(:class="{editor_cover_hide: TK.editorOpenClose}")
+            .close_icon_editor
+              i.fa.fa-times#close(:class="{closeicon_hide: !TK.editorOpenClose}" ,@click="TK.editorOpenClose=!TK.editorOpenClose")
+            .editor_Content
+              .editor_content
+                .editor_content_item(v-for="ED in editors") 
+                  lable {{ED.name + " :"}}
+                  input(v-bind:type="ED.type" , v-bind:placeholder="ED.holder" , :class="{longer: ED.longer}" , v-model="TK[ED.model]")
+                //.editor_content_item
+                  lable test
+                  select(v-model="TK.state")
+                    option(value="已使用 Checked") 已使用 Checked
+                    option(value="已失效 Expired") 已失效 Expired
+    .space_right
+  

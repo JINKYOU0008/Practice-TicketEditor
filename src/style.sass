@@ -1,335 +1,612 @@
-@mixin borderview
-  border: 0.5px solid rgba(#4677b3,0.7)
+$bgc_btn: rgba(#005CAF,0.7)
+$bgc_btn_hover_o: rgba(#274B77,1)
+$bgc_btn_hover: darken($bgc_btn,10)
+$bgc_btn_active: $bgc_btn
+$color_btn_i: rgba(#eee,0.8)
+
+$bgc_btn_gray: rgba(#eee,0.3)
+$bgc_btn_gray_close: rgba(#eee,0)
+$bgc_btn_gray_hover: rgba(#eee,0.4)
+$bgc_btn_gray_active: $bgc_btn_gray
+$color_btn_gray_i: rgba(#eee,0.8)
+$bgc_btn_gray_screenS: rgba(#999,0.8)
+$bgc_btn_gray_screenS_active: lighten($bgc_btn_gray_screenS,20)
+
+$color_btn_word_in: rgba(#eee,1)
+$color_btn_word_side: rgba(#ddd,0.9)
+
+//
+$bgc_body: #333
+$color_words_wite: #eee
+$color_words_black: #222
+$color_Titel_out: #bbb
+
+//
+$bgc_header: rgba(#484848,0.8)
+$color_header_i: rgba(#eee,0.9)
+
+$bgc_Cover: darken(#005CAF,12)
+$bgc_cover_hover: rgba(#eee,0.2) 
+$bgc_ticket_info: #eee
+$color_title: #000
+$color_content: #222
+$color_content_i: #aaa
+$bgc_state: #005CAF
+$bgc_state_o: #006284
+$bgc_state_hover: darken($bgc_state,15)
+//$bgc_btn_active: lighten($bgc_state,15)
+
+$bgc_editor: #444
+$color_editor: #eee
+
+//
 @mixin size($w,$h:$w)
   width: $w
   height: $h
-$color_blueG: #30527c
-$color_bgcWhite: #eee
-$color_wordC: #222
+@mixin btn_active_target($bgc,$border,$bordercolor)
+  background-color: $bgc
+  border: solid $border $bordercolor
+
   
+h1,h2,h3,h4,h5,p
+  margin: 0
+  padding: 0
+
 *
-  // border: 0.5px solid blue
+  //border: solid 0.5px blue 
   position: relative
   box-sizing: border-box
   font-family: 'Quicksand', sans-serif, 'Roboto', sans-serif, 'Noto Sans JP', sans-serif, 'Noto Sans TC', sans-serif
-html,body,#app
-  width: 100%
-  height: 100%
+
+html,body
+  padding: 0
   margin: 0
-  background-color: #333
-#app
+  +size(100%,100%)
+  background-color: $bgc_body
+.header
+  +size(100%,100px)
+  display: flex
+  min-width: 250px
+  border: none 
+  margin-bottom: 25px
+  .space_h_left,.space_h_right
+    flex-grow: 0.5
+  .Add_header,.Delete_header
+    flex-grow: 2
+    padding: 0 0.5% 0 0
+    display: none
+    min-width: 150px
+    .header_item 
+      top: 50%
+      left: 50%
+      transform: translate(-50%,-50%)
+      text-align: center
+      i
+        height: 100%
+        padding: 0
+        margin: 0
+        font-size: 18px
+        vertical-align: middle
+        color: $color_header_i
+      .btn_h
+        cursor: pointer
+        height: 100%
+        width: 60%
+        min-width: 100px
+        color: $color_btn_word_in
+        display: inline-block
+        vertical-align: middle
+        padding: 8px
+        margin-left: 8%
+        border: solid 2px $bgc_btn_gray
+        border-radius: 5px
+        //box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.8)
+        transition-duration: 0.3s
+        &:hover
+          background-color: $bgc_btn_gray
+          border: solid 2px rgba($bgc_btn_gray,0)
+        &:active
+          background-color: $bgc_btn_gray_hover
+          border: solid 2px rgba($bgc_btn_gray,0)
+         
+        font-size: 13px
+        letter-spacing: 1px
+        
+  .Delete_header
+    .btn_h
+      &.screenS_deleteModeOn_target
+        +btn_active_target(darken($bgc_btn_gray,15),2px,rgba($bgc_btn_gray,0.5))
+        &:hover
+          background-color: $bgc_btn_gray
+          border: solid 2px rgba($bgc_btn_gray,0.5)
+        
+.section_main
+  +size(100%,auto)
   display: flex
   justify-content: center
-  padding-top: 120px
-.banner
-  width: 15%
-  min-width: 220px
-  height: 100%
-  .controlpanel
-    .mod_con
+  .space_left
+    flex-grow: 4.5
+    padding: 0
+  .Mode
+    flex-grow: 1.5
+    padding: 0
+    margin: 0
+    min-width: 100px
+    max-width: 250px
+    .mode
+      display: flex
+      align-content: center
       margin-bottom: 20px
-  .addticket
-    +size(45px)
-    border-radius: 12px 12px 12px 4px
-    background-color: rgba(#4677b3,0.7)
-    box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.3)
-    &:hover
+    #New
+      &:hover
+        p
+          color: $color_btn_word_side
+    #Del
+      &:hover
+        p
+          color: $color_btn_word_side
+      .name
+        &.deleteModeOn_target
+          color: darken($color_btn_word_side,15)
+    .btn_mode  
       cursor: pointer
-      background-color: rgba(#274B77,1)
-  #delMode_input
-    display: none
-  .mod_con
-    display: flex
-    align-items: center
-    &:hover
-      p
-        color: rgba(#ccc,1)
-    .Mod_p
+      +size(45px,45px)
+      padding: 0
       margin: 0
-      display: inline-block
-      padding: 0px 10px
-      font-size: 16px
-      font-weight: 400
-      color: rgba(#bbb,0)
-      letter-spacing: 1px
-      transition-duration: 0.5s
-      &.p_show
-        color: rgba(#bbb,0.7)
-    
-  .delticket
-    +size(45px)
-    display: inline-block
-    border-radius: 4px 12px 12px 12px
-    background-color: rgba(#4677b3,0.7)
-    box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.3)
-    &:hover
-      cursor: pointer
-      background-color: rgba(#234773,1)
-    &.delMode_on
-      background-color: rgba(#234773,0)
-      border: 2px solid rgba(#234773,1)
+      background-color: $bgc_btn
+      box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.3)
+      &:hover
+        background-color: $bgc_btn_hover
+      &:active
+        background-color: $bgc_btn_active
+    .add_mode
+      border-radius: 12px 12px 12px 4px
+    .delete_mode
+      border-radius: 4px 12px 12px 12px
+      &.deleteModeOn_target
+        +btn_active_target(transparent,2px,$bgc_btn)
   #plus,#trashcan
     top: 50%
     left: 50% 
     transform: translate(-50%,-50%)
-    color: rgba($color_bgcWhite,0.9)
-    font-size: 25px
-  #trashcan
-    font-size: 22px
-.ticketNeditor
-  display: flex
-  flex-direction: column
-  align-items: center
-.container
-  display: flex
-  flex-direction: row
-  margin-bottom: 60px
-.ticketNoutT
-  z-index: 2
-.ticket
-  width: 250px
-  box-shadow: 0px 0px 40px -0.5px rgba(0,0,0,0.8)
-  border-radius: 4px
-  overflow: hidden
-  background-color: tansparent
-  #open
-    display: none
-  .cover
-    width: 100%
-    height: 140px
-    overflow: hidden
-    display: flex
-    justify-content: center
-    background-color: #484848
-    z-index: 8
-    box-shadow: 0px 0px 40px 5px rgba(0,0,0,0.3)
-    #down
-      width: 100%
-      font-size: 20px
+    font-size: 20px
+    color: $color_btn_i
+  .name_mode
+    padding: 0
+    margin: 0 10% 0 8%
+    .name
+      top: 50%
+      transform: translateY(-50%)
       color: transparent
+      .p_zh
+        font-size: 15px
+      .p_en
+        font-size: 13px
+  .Tickets
+    flex-grow: 2
+    padding: 0
+    min-width: 250px
+    max-width: 280px
+    .Ticket
+      margin-bottom: 80px
+      //box-shadow: 0px 0px 40px -0.5px rgba(0,0,0,0.8)
+    .editbtn
+      z-index: 1
       position: absolute
-      text-align: center
-      bottom: 5px
+      +size(40px)
+      border-radius: 50%
+      right: 0%
+      background-color: $bgc_btn
+      box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.3)
       transition-duration: 0.5s
-      &.close_down
+      #input_editbtn_editorOpenClose
         display: none
-    .bgcolor
-      position: absolute
-      width: 100%
-      height: 100%
-      background-color: transparent
-      z-index: 10
-      transition-duration: 0.5s
-      &:hover
+      &:active
+        background-color: lighten($bgc_btn_active,40)
+      &.infoOpen_editbtnShow
+        right: -20%
+      &.editorOpen_editbtnHide
+        right: 0%
+      #cog
         cursor: pointer
-        background-color: rgba($color_bgcWhite,0.2)
-        #down
-          color: #aaa
-    img
-      width: 100%
-  .info
-    height: 0
-    background-color: tansparent
-    transition-duration: 1.5s
-    &.open_info
-      height: 420px
-  .event
-    height: 100%
-    padding: 24px
-    background-color: $color_bgcWhite
-    border-radius: 0px 0px 10px 10px
-    .tital
-      margin: 0
-      padding: 0
-      margin-bottom: 5px
-      font-size: 24px
-      font-weight: 800
-      letter-spacing: 1px
-    .subtital
-      margin: 0
-      padding: 0
-      margin-bottom: 26px
-      font-size: 18px
-      font-weight: 800
-      letter-spacing: 1px
-    .content
-      margin: 0
-      padding: 0
-      margin-bottom: 18px
-      font-size: 13px
-      font-weight: 600
-      color: $color_wordC
-    .ans
-      display: inline-block
-    i
-      width: 24px
-      text-align: center
-      margin-right: 10px
-      color: #aaa
-    a
-      color: lighten($color_wordC,30)
-      font-weight: 400
-  .status
-    width: 100%
-    height: 52px
-    position: absolute
-    bottom: 0
-    margin: 0
-    background-color: $color_blueG
-    &:hover
-      .st_hover
-        background-color: rgba(#333,0.2)
-        cursor: pointer
-    .st_hover
+        font-size: 20px
+        left: 50%
+        top: 50%
+        transform: translate(-52%,-47%)
+        color: $color_btn_i
+    .delbtn 
+      cursor: pointer
       position: absolute
-      width: 100%
-      height: 100%
-      background-color: rgba(#333,0)
+      +size(40px)
+      border-radius: 45% 0 0 45%
+      top: 15px
+      left: 20%
+      transform: translateX(-100%)
+      background-color: $bgc_btn_gray_close
       transition-duration: 0.3s
-      &.ticketused
-        cursor: default
-        background-color: rgba(#111,0.3)
-    p
-      width: 100%
-      font-size: 15px
-      font-weight: 600
-      position: absolute
-      text-align: center
-      letter-spacing: 1.5px
-      color: #ddd
-.out_tital
-  margin: 0
-  padding: 10px 8px
-  font-size: 16px
-  font-weight: 400
-  color: #bbb
-  transition-duration: 1s
-  border-bottom: 2px solid rgba($color_bgcWhite,0.2)
-  &.close_outT
-    color: transparent
-    border: none
-
-.setting
-  +size(100%)
-  margin: 0
-  position: absolute
-  .seticon
-    +size(40px)
-    transition-duration: 0.8s
-    transition-delay: 0.8s
-    left: 108%
-    background-color: rgba(#4677b3,0.7)
-    border-radius: 50%
-    box-shadow: 0px 0px 20px 5px rgba(0,0,0,0.3)
-    &.open_ed
-      left: 0%
-      transition-delay: 0s
-    &.hide_set
-      transition-delay: 0s
-      left: 0%
-    &:hover
-      cursor: pointer
-    #cog
-      color: rgba($color_bgcWhite,0.9)
-      font-size: 20px
-      left: 50%
-      top: 50%
-      transform: translate(-50%,-50%)
-  .delMode
-    +size(50px,45px)
-    z-index: 0
-    background-color: rgba(#eee,0)
-    left: 3px
-    border-radius: 20px 0px 0px 20px
-    transition-duration: 0.5s
-    &.delMode_show
-      left: -32px
-      background-color: rgba(#eee,0.3)
-    &:hover
-      cursor: pointer
-      background-color: rgba(#eee,0.4)
-      left: -50px
-    #trash
-      color: rgba(#eee,0.8)
-      font-size: 18px
-      left: 10px
-      top: 50%
-      transform: translateY(-52%)
-      
-.editor
-  width: 360px
-  height: 600px
-  overflow: hidden
-  transition-delay: 0.2s
-  transition-duration: 1s
-  margin-left: 60px
-  background-color: rgba(#777,0.3)
-  &.close_ed
-    width: 0
-    margin-left: 0
-  &.close_ed_h
-    height: 0
-  .cover_ed
-    width: 100%
-    height: 100%
-    position: absolute
-    z-index: 5
-    background-color: #484848
-    &.open_cover
-      background-color: rgba(#484848,0)
-      z-index: 0
-      transition-delay: 1s
-  .closeEd
-    margin: 0
-    .icon_con
-      height: 40px
-      .closeicon
-        width: 25px
-        height: 25px
-        position: absolute
-        right: 0
-        margin: 10px
-        &:hover
+      &.del_mode
+        background-color: $bgc_btn_gray
+        left: 3%
+      &:hover
+        background-color: $bgc_btn_gray_hover
+        left: 0.5%
+      &:active
+        background-color: $bgc_btn_gray_active
+      i
+        margin: 0
+        padding: 0
+        //position: absolute
+        left: 50%
+        top: 50%
+        transform: translate(-60%,-56%)
+        font-size: 17px
+        color: $color_btn_gray_i
+    .ticket
+      padding: 0
+      +size(100%,auto)
+      #input_cover_infoOpenClose
+        display: none
+      .Cover
+        z-index: 2
+        border-radius: 5px 5px 0 0
+        background-color: $bgc_body
+        overflow: hidden
+        background-color: darken($bgc_Cover,15)
+        box-shadow: 0px 0px 40px -0.5px rgba(0,0,0,0.8)
+        .cover
+          z-index: 5
           cursor: pointer
-        &:before
-          content: ''
+          background-color: transparent
           position: absolute
-          +size(15%,100%)
-          left: 50%
-          background-color: #aaa
-          border-radius: 5px
-          transform: translateX(-50%)
-          transform: rotate(-45deg)
-        &:after
-          content: ''
+          width: 100%
+          height: 100%
+          #down
+            width: 100%
+            text-align: center
+            font-size: 20px
+            position: absolute
+            bottom: 5px
+            color: transparent
+            display: block
+            transition-duration: 0.5s
+            &.infoOpen_displayNone
+              display: none
+          &:hover
+            background-color: $bgc_cover_hover
+            #down
+              color: $color_content_i
+        .image
+          +size(100%,160px)
+          background-repeat: no-repeat
+          background-size: cover
+          background-position: center center
+      .info
+        padding: 0px 24px
+        height: 370px
+        overflow: hidden
+        background-color: $bgc_ticket_info
+        box-shadow: 0px 0px 40px -0.5px rgba(0,0,0,0.8)
+        transition-duration: 1.2s
+        &.info_close
+          height: 0
+        .title
+          margin: 0
+          padding: 0
+          margin-top: 24px
+          
+          font-size: 22px
+          font-weight: 800
+          letter-spacing: 1px
+          
+        .subtitle
+          font-size: 16px
+          padding: 0
+          margin: 5px 0px
+          
+          font-size: 18px
+          font-weight: 800
+          letter-spacing: 1px
+          
+        .content
+          margin: 0
+          padding: 0
+          margin-top: 18px
+          margin-bottom: 6px
+          font-size: 13px
+          font-weight: 600
+          i
+            width: 24px
+            text-align: center
+            margin-right: 10px
+            
+            color: #aaa
+            
+          .ans
+            display: inline-block
+          a
+            color: #555
+        &.close_ticket
+          height: 0px
+          padding: 0
+      .usingstate
+        .stateNoutname
+          cursor: pointer
+          padding: 28px 0px
+          background-color: $bgc_btn
+          transition-duration: 0.3s
+          border-bottom: solid 0px rgba($color_Titel_out,0.4)
+          border-radius: 0 0 5px 5px
+          &:hover
+            background-color: $bgc_btn_hover
+          &.usingstate_expired
+            background-color: $bgc_btn_hover
+            cursor: auto
+            .state
+              color: $color_Titel_out
+          .state,.outName
+            position: absolute
+          .state
+            top: 50%
+            left: 50%
+            transform: translate(-50%,-50%)
+            color: $color_btn_word_in
+            
+            font-size: 15px
+            font-weight: 400
+            letter-spacing: 0px
+            
+          .outName
+            top: 50%
+            transform: translateY(-50%)
+            padding: 0px 6px
+            font-size: 16px
+            letter-spacing: 1px
+            font-weight: 400
+            color: transparent
+            display: none
+          &.close_ticket
+            background-color: transparent
+            border-radius: 0 0 0 0
+            border-bottom: solid 2px rgba($color_Titel_out,0.4)
+            cursor: auto
+            .state
+              color: transparent
+              display: none
+            .outName
+              display: block
+              color: $color_Titel_out
+    .Edit
+      padding: 0
+      position: absolute
+      left: 100%
+      top: 0
+      +size(420px,100%)
+      overflow: hidden
+      .editor
+        background-color: $bgc_editor
+        +size(82%,100%)
+        transition-duration: 1s
+        margin-left: 15%
+        z-index: 1
+        .editor_cover
+          width: 100%
+          height: 100%
           position: absolute
-          +size(15%,100%)
-          left: 50%
-          background-color: #aaa
-          border-radius: 5px
-          transform: translateX(-50%)
-          transform: rotate(45deg)
-        &.show_icon_ed
-  .items
+          z-index: 5
+          background-color: $bgc_editor
+          &.editor_cover_hide
+            background-color: rgba($bgc_editor,0)
+            z-index: 0
+            transition-delay: 1s
+        &.close_editor
+          +size(0px,100%)
+        .close_icon_editor
+          +size(100%,8%)
+          #close
+            font-size: 30px
+            z-index: 2
+            cursor: pointer
+            position: absolute
+            right: 0
+            padding: 4% 5%
+            color: $color_Titel_out
+            transition-duration: 0.8s
+            &.closeicon_hide
+              z-index: 0
+              color: rgba($color_Titel_out,0)
+        .editor_Content
+          overflow: auto
+          padding: 5%
+          +size(100%,92%)
+          .editor_content
+            display: flex
+            flex-direction: column
+            .editor_content_item
+              margin-bottom: 15px
+              color: $color_editor
+              lable
+                display: inline-block
+                width: 36%
+                font-size: 14px
+              input
+                display: inline-block
+                margin-left: 2%
+                &.longer
+                  width: 60% 
+  .space_right
+    flex-grow: 6
+    padding: 0
+    
+@media screen and (max-width: 1200px)
+  .section_main
+    +size(100%,auto)
     display: flex
-    flex-direction: column
     justify-content: center
-    padding: 10px
-    padding-top: 0px
-    .userinput
-      margin: 8px 8px 8px 15px
-      transition-delay: 2s
-      lable
-        width: 95px
-        display: inline-block
-        color: #eee
-        font-size: 14px
-        margin-right: 18px
-      input
-        display: inline-block
-  .longer
-    width: 60%
-  .status_con
+    .block
+    .space_left
+      flex-grow: 1.5
+      padding: 0px
+    .Mode
+      flex-grow: 2.5
+      padding: 0px
+      min-width: 100px
+      //new
+      z-index: 1
+      .name
+        color: $color_btn_word_side
+    .Tickets
+      flex-grow: 3
+      padding: 0px
+      min-width: 250px
+      max-width: 280px
+      .Ticket
+        .editbtn
+        .delbtn
+          //new
+          display: none
+          z-index: 1
+          &.del_mode
+            display: block
+        .ticket
+          .Cover
+            z-index: 1
+            .cover
+              z-index: 2
+            .image
+          .info
+            z-index: 1
+          .usingstate
+            z-index: 1
+        .Edit
+          z-index: 3
+          position: fixed
+          left: 0%
+          +size(100%,100%)
+          //overflow: hidden
+          //new
+          background-color: rgba(#222,0.8)
+          //new
+          &.screenMS_editor_close_bgcHide
+            z-index: 0
+            background-color: rgba(#222,0)
+          .editor
+            //border: solid 1px green  
+            +size(80%,80%)
+            max-width: 670px
+            margin-left: 0
+            //new
+            top: 50%
+            left: 50%
+            transform: translate(-50%,-50%)
+            .editor_cover
+              &.editor_cover_hide
+            &.close_editor
+              //new
+              display: none
+            .close_icon_editor
+              +size(100%,5%)
+              #close
+                padding: 3% 4%
+                &.closeicon_hide
+            .editor_Content
+              +size(100%,95%)
+              padding: 5% 10%
+              .editor_content
+                .editor_content_item
+                  margin-bottom: 35px
+                  lable 
+                    width: 35%
+                    font-size: 16px
+                  input
+                    margin-left: 1%
+                    &.longer
+                      width: 62% 
+  .space_right
+    flex-grow: 6
+    .space_right
+      flex-grow: 3
+      padding: 20px
+  
+@media screen and (max-width: 500px)
+  .header
+    z-index: 1
+    +size(100%,60px)
+    background-color: $bgc_header
+    .Add_header,.Delete_header
+      display: block 
+  .section_main
+    +size(100%,auto)
     display: flex
-    align-items: center
-    left: 8px
+    justify-content: center
+    .block
+    .space_left
+      flex-grow: 0.5
+      padding: 0px
+    .Mode
+      display: none
+    .Tickets
+      flex-grow: 4
+      padding: 0px
+      min-width: 250px
+      max-width: 280px
+      .Ticket
+        .editbtn
+          right: 0%
+          margin: 10px
+          &.infoOpen_editbtnShow
+            right: 0%
+            z-index: 4
+        .delbtn
+          border-radius: 0 0 45% 45%
+          top: 0%
+          left: 3%
+          transform: translateX(0%)
+          transform: translateY(-8%)
+          background-color: $bgc_btn_gray_screenS
+          z-index: 4
+          &:active
+            background-color: $bgc_btn_gray_screenS_active
+          i
+            transform: translate(-55%,-55%)
+        .ticket
+          .Cover
+            .cover
+            .image
+          .info
+          .usingstate
+        .Edit
+          z-index: 4
+          &.screenMS_editor_close_bgcHide
+          .editor
+            background-color: $bgc_editor
+            +size(90%,95%)
+            max-width: 670px
+            float: none
+            top: 50%
+            left: 50%
+            margin-left: 0
+            transform: translate(-50%,-50%)
+            .editor_cover
+              &.editor_cover_hide
+            &.close_editor
+            .close_icon_editor
+              #close
+                padding: 3% 5%
+                &.closeicon_hide
+            .editor_Content
+              padding: 2% 12%
+              .editor_content
+                .editor_content_item
+                  margin-bottom: 30px
+                  lable
+                    width: 100%
+                    //new
+                    margin-bottom: 8px
+                  input
+                    margin-left: 0
+                    &.longer
+                      width: 100%
+                    
+    .space_right
+      flex-grow: 0.5
+      padding: 0px
