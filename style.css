@@ -468,7 +468,7 @@ html, body {
   padding: 0;
 }
 
-@media screen and (max-width: 1200px) {
+@media only screen and (max-width: 1200px) {
   .section_main {
     width: 100%;
     height: auto;
@@ -571,7 +571,7 @@ html, body {
     padding: 20px;
   }
 }
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   .header {
     z-index: 1;
     width: 100%;
