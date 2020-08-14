@@ -22,7 +22,7 @@ $color_words_black: #222
 $color_Titel_out: #bbb
 
 //
-$bgc_header: rgba(#484848,1)
+$bgc_header: #484848
 $color_header_i: rgba(#eee,0.9)
 
 $bgc_Cover: darken(#005CAF,12)
@@ -187,6 +187,7 @@ html,body
     padding: 0
     min-width: 250px
     max-width: 280px
+    margin-top: 0
     .Ticket
       margin-bottom: 80px
       //box-shadow: 0px 0px 40px -0.5px rgba(0,0,0,0.8)
@@ -530,7 +531,7 @@ html,body
 @media only screen and (max-width: 600px)
   .header
     position: fixed
-    z-index: 4
+    z-index: 5
     +size(100%,60px)
     background-color: $bgc_header
     .Add_header,.Delete_header
@@ -550,6 +551,7 @@ html,body
       padding: 0px
       min-width: 250px
       max-width: 280px
+      margin-top: 100px
       .Ticket
         .editbtn
           right: 0%
@@ -576,7 +578,7 @@ html,body
           .info
           .usingstate
         .Edit
-          z-index: 5
+          z-index: 6
           &.screenMS_editor_close_bgcHide
           .editor
             background-color: $bgc_editor
