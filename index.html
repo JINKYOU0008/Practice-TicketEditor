@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ticket Editor-X</title>
+  <title>Ticket Editor</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Noto+Sans+JP&amp;family=Noto+Sans+TC&amp;family=Quicksand&amp;family=Roboto&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
@@ -108,12 +108,6 @@
                   <lable>{{ED.name + " :"}}</lable>
                   <input v-bind:type="ED.type" v-bind:placeholder="ED.holder" :class="{longer: ED.longer}" v-model="TK[ED.model]"/>
                 </div>
-                <!--.editor_content_item
-                lable test
-                select(v-model="TK.state")
-                  option(value="已使用 Checked") 已使用 Checked
-                  option(value="已失效 Expired") 已失效 Expired
-                -->
               </div>
             </div>
           </div>
