@@ -22,7 +22,7 @@ $color_words_black: #222
 $color_Titel_out: #bbb
 
 //
-$bgc_header: rgba(#484848,0.8)
+$bgc_header: rgba(#484848,1)
 $color_header_i: rgba(#eee,0.9)
 
 $bgc_Cover: darken(#005CAF,12)
@@ -529,7 +529,8 @@ html,body
   
 @media only screen and (max-width: 600px)
   .header
-    z-index: 1
+    position: fixed
+    z-index: 4
     +size(100%,60px)
     background-color: $bgc_header
     .Add_header,.Delete_header
@@ -575,7 +576,7 @@ html,body
           .info
           .usingstate
         .Edit
-          z-index: 4
+          z-index: 5
           &.screenMS_editor_close_bgcHide
           .editor
             background-color: $bgc_editor
