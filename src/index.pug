@@ -83,10 +83,6 @@
                 .editor_content_item(v-for="ED in editors") 
                   lable {{ED.name + " :"}}
                   input(v-bind:type="ED.type" , v-bind:placeholder="ED.holder" , :class="{longer: ED.longer}" , v-model="TK[ED.model]")
-                //.editor_content_item
-                  lable test
-                  select(v-model="TK.state")
-                    option(value="已使用 Checked") 已使用 Checked
-                    option(value="已失效 Expired") 已失效 Expired
+                
     .space_right
   
