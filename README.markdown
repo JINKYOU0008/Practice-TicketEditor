@@ -1,5 +1,5 @@
-# [work] Vue-Ticket Editor-IIII
+Ticket Editor
 
-A Pen created on CodePen.io. Original URL: [https://codepen.io/fangjing/pen/dyGXoLx](https://codepen.io/fangjing/pen/dyGXoLx).
+A Pen on CodePen.io. Original URL: https://codepen.io/fangjing/pen/zYrMmzp
 
 
