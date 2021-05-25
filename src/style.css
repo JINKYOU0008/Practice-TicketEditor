@@ -1,0 +1,665 @@
+h1, h2, h3, h4, h5, p {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  position: relative;
+  box-sizing: border-box;
+  font-family: "Quicksand", sans-serif, "Roboto", sans-serif, "Noto Sans JP", sans-serif, "Noto Sans TC", sans-serif;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+}
+
+.header {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  min-width: 250px;
+  border: none;
+  margin-bottom: 25px;
+}
+.header .space_h_left, .header .space_h_right {
+  flex-grow: 0.5;
+}
+.header .Add_header, .header .Delete_header {
+  flex-grow: 2;
+  padding: 0 0.5% 0 0;
+  display: none;
+  min-width: 150px;
+}
+.header .Add_header .header_item, .header .Delete_header .header_item {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.header .Add_header .header_item i, .header .Delete_header .header_item i {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+  vertical-align: middle;
+  color: rgba(238, 238, 238, 0.9);
+}
+.header .Add_header .header_item .btn_h, .header .Delete_header .header_item .btn_h {
+  cursor: pointer;
+  height: 100%;
+  width: 60%;
+  min-width: 100px;
+  color: #eeeeee;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 8px;
+  margin-left: 8%;
+  border: solid 2px rgba(238, 238, 238, 0.3);
+  border-radius: 5px;
+  transition-duration: 0.3s;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+.header .Add_header .header_item .btn_h:hover, .header .Delete_header .header_item .btn_h:hover {
+  background-color: rgba(238, 238, 238, 0.3);
+  border: solid 2px rgba(238, 238, 238, 0);
+}
+.header .Add_header .header_item .btn_h:active, .header .Delete_header .header_item .btn_h:active {
+  background-color: rgba(238, 238, 238, 0.4);
+  border: solid 2px rgba(238, 238, 238, 0);
+}
+.header .Delete_header .btn_h.screenS_deleteModeOn_target {
+  background-color: rgba(200, 200, 200, 0.3);
+  border: solid 2px rgba(238, 238, 238, 0.5);
+}
+.header .Delete_header .btn_h.screenS_deleteModeOn_target:hover {
+  background-color: rgba(238, 238, 238, 0.3);
+  border: solid 2px rgba(238, 238, 238, 0.5);
+}
+
+.section_main {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+.section_main .space_left {
+  flex-grow: 4.5;
+  padding: 0;
+}
+.section_main .Mode {
+  flex-grow: 1.5;
+  padding: 0;
+  margin: 0;
+  min-width: 100px;
+  max-width: 250px;
+}
+.section_main .Mode .mode {
+  display: flex;
+  align-content: center;
+  margin-bottom: 20px;
+}
+.section_main .Mode #New:hover p {
+  color: rgba(221, 221, 221, 0.9);
+}
+.section_main .Mode #Del:hover p {
+  color: rgba(221, 221, 221, 0.9);
+}
+.section_main .Mode #Del .name.deleteModeOn_target {
+  color: rgba(183, 183, 183, 0.9);
+}
+.section_main .Mode .btn_mode {
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(0, 92, 175, 0.7);
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+}
+.section_main .Mode .btn_mode:hover {
+  background-color: rgba(0, 65, 124, 0.7);
+}
+.section_main .Mode .btn_mode:active {
+  background-color: rgba(0, 92, 175, 0.7);
+}
+.section_main .Mode .add_mode {
+  border-radius: 12px 12px 12px 4px;
+}
+.section_main .Mode .delete_mode {
+  border-radius: 4px 12px 12px 12px;
+}
+.section_main .Mode .delete_mode.deleteModeOn_target {
+  background-color: transparent;
+  border: solid 2px rgba(0, 92, 175, 0.7);
+}
+.section_main #plus, .section_main #trashcan {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: rgba(238, 238, 238, 0.8);
+}
+.section_main .name_mode {
+  padding: 0;
+  margin: 0 10% 0 8%;
+}
+.section_main .name_mode .name {
+  top: 50%;
+  transform: translateY(-50%);
+  color: transparent;
+}
+.section_main .name_mode .name .p_zh {
+  font-size: 15px;
+}
+.section_main .name_mode .name .p_en {
+  font-size: 13px;
+}
+.section_main .Tickets {
+  flex-grow: 2;
+  padding: 0;
+  min-width: 250px;
+  max-width: 280px;
+}
+.section_main .Tickets .Ticket {
+  margin-bottom: 80px;
+}
+.section_main .Tickets .editbtn {
+  z-index: 1;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  right: 0%;
+  background-color: rgba(0, 92, 175, 0.7);
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+  transition-duration: 0.5s;
+}
+.section_main .Tickets .editbtn #input_editbtn_editorOpenClose {
+  display: none;
+}
+.section_main .Tickets .editbtn:active {
+  background-color: rgba(124, 193, 255, 0.7);
+}
+.section_main .Tickets .editbtn.infoOpen_editbtnShow {
+  right: -20%;
+}
+.section_main .Tickets .editbtn.editorOpen_editbtnHide {
+  right: 0%;
+}
+.section_main .Tickets .editbtn #cog {
+  cursor: pointer;
+  font-size: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-52%, -47%);
+  color: rgba(238, 238, 238, 0.8);
+}
+.section_main .Tickets .delbtn {
+  cursor: pointer;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 45% 0 0 45%;
+  top: 15px;
+  left: 20%;
+  transform: translateX(-100%);
+  background-color: rgba(238, 238, 238, 0);
+  transition-duration: 0.3s;
+}
+.section_main .Tickets .delbtn.del_mode {
+  background-color: rgba(238, 238, 238, 0.3);
+  left: 3%;
+}
+.section_main .Tickets .delbtn:hover {
+  background-color: rgba(238, 238, 238, 0.4);
+  left: 0.5%;
+}
+.section_main .Tickets .delbtn:active {
+  background-color: rgba(238, 238, 238, 0.3);
+}
+.section_main .Tickets .delbtn i {
+  margin: 0;
+  padding: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-60%, -56%);
+  font-size: 17px;
+  color: rgba(238, 238, 238, 0.8);
+}
+.section_main .Tickets .ticket {
+  padding: 0;
+  width: 100%;
+  height: auto;
+}
+.section_main .Tickets .ticket #input_cover_infoOpenClose {
+  display: none;
+}
+.section_main .Tickets .ticket .Cover {
+  z-index: 2;
+  border-radius: 5px 5px 0 0;
+  background-color: #333;
+  overflow: hidden;
+  background-color: #001425;
+  box-shadow: 0px 0px 40px -0.5px rgba(0, 0, 0, 0.8);
+}
+.section_main .Tickets .ticket .Cover .cover {
+  z-index: 5;
+  cursor: pointer;
+  background-color: transparent;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.section_main .Tickets .ticket .Cover .cover #down {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  position: absolute;
+  bottom: 5px;
+  color: transparent;
+  display: block;
+  transition-duration: 0.5s;
+}
+.section_main .Tickets .ticket .Cover .cover #down.infoOpen_displayNone {
+  display: none;
+}
+.section_main .Tickets .ticket .Cover .cover:hover {
+  background-color: rgba(238, 238, 238, 0.2);
+}
+.section_main .Tickets .ticket .Cover .cover:hover #down {
+  color: #aaa;
+}
+.section_main .Tickets .ticket .Cover .image {
+  width: 100%;
+  height: 160px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+.section_main .Tickets .ticket .info {
+  padding: 0px 24px;
+  height: 370px;
+  overflow: hidden;
+  background-color: #eee;
+  box-shadow: 0px 0px 40px -0.5px rgba(0, 0, 0, 0.8);
+  transition-duration: 1.2s;
+}
+.section_main .Tickets .ticket .info.info_close {
+  height: 0;
+}
+.section_main .Tickets .ticket .info .title {
+  margin: 0;
+  padding: 0;
+  margin-top: 24px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.section_main .Tickets .ticket .info .subtitle {
+  font-size: 16px;
+  padding: 0;
+  margin: 5px 0px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.section_main .Tickets .ticket .info .content {
+  margin: 0;
+  padding: 0;
+  margin-top: 18px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.section_main .Tickets .ticket .info .content i {
+  width: 24px;
+  text-align: center;
+  margin-right: 10px;
+  color: #aaa;
+}
+.section_main .Tickets .ticket .info .content .ans {
+  display: inline-block;
+}
+.section_main .Tickets .ticket .info .content a {
+  color: #555;
+}
+.section_main .Tickets .ticket .info.close_ticket {
+  height: 0px;
+  padding: 0;
+}
+.section_main .Tickets .ticket .usingstate .stateNoutname {
+  cursor: pointer;
+  padding: 28px 0px;
+  background-color: rgba(0, 92, 175, 0.7);
+  transition-duration: 0.3s;
+  border-bottom: solid 0px rgba(187, 187, 187, 0.4);
+  border-radius: 0 0 5px 5px;
+}
+.section_main .Tickets .ticket .usingstate .stateNoutname:hover {
+  background-color: rgba(0, 65, 124, 0.7);
+}
+.section_main .Tickets .ticket .usingstate .stateNoutname.usingstate_expired {
+  background-color: rgba(0, 65, 124, 0.7);
+  cursor: auto;
+}
+.section_main .Tickets .ticket .usingstate .stateNoutname.usingstate_expired .state {
+  color: #bbb;
+}
+.section_main .Tickets .ticket .usingstate .stateNoutname .state, .section_main .Tickets .ticket .usingstate .stateNoutname .outName {
+  position: absolute;
+}
+.section_main .Tickets .ticket .usingstate .stateNoutname .state {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #eeeeee;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+.section_main .Tickets .ticket .usingstate .stateNoutname .outName {
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0px 6px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  color: transparent;
+  display: none;
+}
+.section_main .Tickets .ticket .usingstate .stateNoutname.close_ticket {
+  background-color: transparent;
+  border-radius: 0 0 0 0;
+  border-bottom: solid 2px rgba(187, 187, 187, 0.4);
+  cursor: auto;
+}
+.section_main .Tickets .ticket .usingstate .stateNoutname.close_ticket .state {
+  color: transparent;
+  display: none;
+}
+.section_main .Tickets .ticket .usingstate .stateNoutname.close_ticket .outName {
+  display: block;
+  color: #bbb;
+}
+.section_main .Tickets .Edit {
+  padding: 0;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  width: 420px;
+  height: 100%;
+  overflow: hidden;
+}
+.section_main .Tickets .Edit .editor {
+  background-color: #444;
+  width: 82%;
+  height: 100%;
+  transition-duration: 1s;
+  margin-left: 15%;
+  z-index: 1;
+}
+.section_main .Tickets .Edit .editor .editor_cover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 5;
+  background-color: #444;
+}
+.section_main .Tickets .Edit .editor .editor_cover.editor_cover_hide {
+  background-color: rgba(68, 68, 68, 0);
+  z-index: 0;
+  transition-delay: 1s;
+}
+.section_main .Tickets .Edit .editor.close_editor {
+  width: 0px;
+  height: 100%;
+}
+.section_main .Tickets .Edit .editor .close_icon_editor {
+  width: 100%;
+  height: 8%;
+}
+.section_main .Tickets .Edit .editor .close_icon_editor #close {
+  font-size: 30px;
+  z-index: 2;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  padding: 4% 5%;
+  color: #bbb;
+  transition-duration: 0.8s;
+}
+.section_main .Tickets .Edit .editor .close_icon_editor #close.closeicon_hide {
+  z-index: 0;
+  color: rgba(187, 187, 187, 0);
+}
+.section_main .Tickets .Edit .editor .editor_Content {
+  overflow: auto;
+  padding: 5%;
+  width: 100%;
+  height: 92%;
+}
+.section_main .Tickets .Edit .editor .editor_Content .editor_content {
+  display: flex;
+  flex-direction: column;
+}
+.section_main .Tickets .Edit .editor .editor_Content .editor_content .editor_content_item {
+  margin-bottom: 15px;
+  color: #eee;
+}
+.section_main .Tickets .Edit .editor .editor_Content .editor_content .editor_content_item lable {
+  display: inline-block;
+  width: 36%;
+  font-size: 14px;
+}
+.section_main .Tickets .Edit .editor .editor_Content .editor_content .editor_content_item input {
+  display: inline-block;
+  margin-left: 2%;
+}
+.section_main .Tickets .Edit .editor .editor_Content .editor_content .editor_content_item input.longer {
+  width: 60%;
+}
+.section_main .space_right {
+  flex-grow: 6;
+  padding: 0;
+}
+
+@media only screen and (max-width: 1200px) {
+  .section_main {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .section_main .space_left {
+    flex-grow: 1.5;
+    padding: 0px;
+  }
+  .section_main .Mode {
+    flex-grow: 2.5;
+    padding: 0px;
+    min-width: 100px;
+    z-index: 1;
+  }
+  .section_main .Mode .name {
+    color: rgba(221, 221, 221, 0.9);
+  }
+  .section_main .Tickets {
+    flex-grow: 3;
+    padding: 0px;
+    min-width: 250px;
+    max-width: 280px;
+  }
+  .section_main .Tickets .Ticket .delbtn {
+    display: none;
+    z-index: 1;
+  }
+  .section_main .Tickets .Ticket .delbtn.del_mode {
+    display: block;
+  }
+  .section_main .Tickets .Ticket .ticket .Cover {
+    z-index: 1;
+  }
+  .section_main .Tickets .Ticket .ticket .Cover .cover {
+    z-index: 2;
+  }
+  .section_main .Tickets .Ticket .ticket .info {
+    z-index: 1;
+  }
+  .section_main .Tickets .Ticket .ticket .usingstate {
+    z-index: 1;
+  }
+  .section_main .Tickets .Ticket .Edit {
+    z-index: 3;
+    position: fixed;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(34, 34, 34, 0.8);
+  }
+  .section_main .Tickets .Ticket .Edit.screenMS_editor_close_bgcHide {
+    z-index: 0;
+    background-color: rgba(34, 34, 34, 0);
+  }
+  .section_main .Tickets .Ticket .Edit .editor {
+    width: 80%;
+    height: 80%;
+    max-width: 670px;
+    margin-left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .section_main .Tickets .Ticket .Edit .editor.close_editor {
+    display: none;
+  }
+  .section_main .Tickets .Ticket .Edit .editor .close_icon_editor {
+    width: 100%;
+    height: 5%;
+  }
+  .section_main .Tickets .Ticket .Edit .editor .close_icon_editor #close {
+    padding: 3% 4%;
+  }
+  .section_main .Tickets .Ticket .Edit .editor .editor_Content {
+    width: 100%;
+    height: 95%;
+    padding: 5% 10%;
+  }
+  .section_main .Tickets .Ticket .Edit .editor .editor_Content .editor_content .editor_content_item {
+    margin-bottom: 35px;
+  }
+  .section_main .Tickets .Ticket .Edit .editor .editor_Content .editor_content .editor_content_item lable {
+    width: 35%;
+    font-size: 16px;
+  }
+  .section_main .Tickets .Ticket .Edit .editor .editor_Content .editor_content .editor_content_item input {
+    margin-left: 1%;
+  }
+  .section_main .Tickets .Ticket .Edit .editor .editor_Content .editor_content .editor_content_item input.longer {
+    width: 62%;
+  }
+
+  .space_right {
+    flex-grow: 6;
+  }
+  .space_right .space_right {
+    flex-grow: 3;
+    padding: 20px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .header {
+    z-index: 1;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(72, 72, 72, 0.8);
+  }
+  .header .Add_header, .header .Delete_header {
+    display: block;
+  }
+
+  .section_main {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .section_main .space_left {
+    flex-grow: 0.5;
+    padding: 0px;
+  }
+  .section_main .Mode {
+    display: none;
+  }
+  .section_main .Tickets {
+    flex-grow: 4;
+    padding: 0px;
+    min-width: 250px;
+    max-width: 280px;
+  }
+  .section_main .Tickets .Ticket .editbtn {
+    right: 0%;
+    margin: 10px;
+  }
+  .section_main .Tickets .Ticket .editbtn.infoOpen_editbtnShow {
+    right: 0%;
+    z-index: 4;
+  }
+  .section_main .Tickets .Ticket .delbtn {
+    border-radius: 0 0 45% 45%;
+    top: 0%;
+    left: 3%;
+    transform: translateX(0%);
+    transform: translateY(-8%);
+    background-color: rgba(153, 153, 153, 0.8);
+    z-index: 4;
+  }
+  .section_main .Tickets .Ticket .delbtn:active {
+    background-color: rgba(204, 204, 204, 0.8);
+  }
+  .section_main .Tickets .Ticket .delbtn i {
+    transform: translate(-55%, -55%);
+  }
+  .section_main .Tickets .Ticket .Edit {
+    z-index: 4;
+  }
+  .section_main .Tickets .Ticket .Edit .editor {
+    background-color: #444;
+    width: 90%;
+    height: 95%;
+    max-width: 670px;
+    float: none;
+    top: 50%;
+    left: 50%;
+    margin-left: 0;
+    transform: translate(-50%, -50%);
+  }
+  .section_main .Tickets .Ticket .Edit .editor .close_icon_editor #close {
+    padding: 3% 5%;
+  }
+  .section_main .Tickets .Ticket .Edit .editor .editor_Content {
+    padding: 2% 12%;
+  }
+  .section_main .Tickets .Ticket .Edit .editor .editor_Content .editor_content .editor_content_item {
+    margin-bottom: 30px;
+  }
+  .section_main .Tickets .Ticket .Edit .editor .editor_Content .editor_content .editor_content_item lable {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  .section_main .Tickets .Ticket .Edit .editor .editor_Content .editor_content .editor_content_item input {
+    margin-left: 0;
+  }
+  .section_main .Tickets .Ticket .Edit .editor .editor_Content .editor_content .editor_content_item input.longer {
+    width: 100%;
+  }
+  .section_main .space_right {
+    flex-grow: 0.5;
+    padding: 0px;
+  }
+}
+/*# sourceMappingURL=style.css.map */
